@@ -2,6 +2,7 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :list_doctors, only: [:new, :edit]
+  before_action :validate_user!, only: [:destroy, :edit, :update]
 
   # GET /appointments
   # GET /appointments.json
@@ -68,6 +69,13 @@ class AppointmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_appointment
       @appointment = Appointment.find(params[:id])
+    end
+
+    def validate_user!
+      unless current_user.id == @appointment.user.id
+          redirect_to root_path, notice: 'Solo puedes modificar citas propias'
+      end
+
     end
 
     def list_doctors

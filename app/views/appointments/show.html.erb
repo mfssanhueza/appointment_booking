@@ -1,13 +1,10 @@
-<h3>Información de su cita médica:</h3>
-<p>
-  <strong>Doctor:</strong>
-  <%= @appointment.doctor.name %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @appointment.date %>
-</p>
-
-<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
-<%= link_to 'Back', appointments_path %>
+<div class="card">
+  <h5 class="card-header"><%= @appointment.user.email %></h5>
+  <div class="card-body">
+    <h3 class="card-title">Información de su cita médica:</h3>
+    <h5>Doctor: <%= @appointment.doctor.name%></h5>
+    <p class="card-text">Fecha: <%= @appointment.date.to_formatted_s(:short) %></p>
+    <%= link_to '<<Volver', appointments_path, class:'btn btn-secondary' %>
+    <%= link_to 'Editar', edit_appointment_path(@appointment), class:'btn btn-info' %>
+  </div>
+</div>

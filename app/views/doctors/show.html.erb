@@ -1,17 +1,19 @@
-<p>
-  <strong>Name:</strong>
-  <%= @doctor.id %>
-</p>
-
-
-<p>
-  <strong>Specialty:</strong>
-  <% @doctor.specialties.each do |s| %>
-    <%= s.name %>
-  <% end %>
-</p>
-
-
-
-<%= link_to 'Edit', edit_doctor_path(@doctor) %> |
-<%= link_to 'Back', doctors_path %>
+<div class="card">
+  <h5 class="card-header"><%= @doctor.name %></h5>
+  <div class="card-body">
+    <h3 class="card-title">Información de <%= @doctor.name %>:</h3>
+    <% if current_user != nil && current_user.admin? %>
+      <h5>Número de citas: <%= @doctor.appointments.count %></h5>
+    <% end %>
+    <h5>Especialidades:</h5>
+    <ul>
+      <% @doctor.specialties.each do |s| %>
+        <li><%= s.name %></li>
+      <% end %>
+    </ul>
+    <%= link_to '<<Volver', doctors_path, class:'btn btn-secondary' %>
+    <% if current_user != nil && current_user.admin? %>
+      <%= link_to 'Editar', edit_doctor_path(@doctor), class:'btn btn-info' %>
+    <% end %>
+  </div>
+</div>

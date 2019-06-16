@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+.phantom-navbar{
+  height: 80px;
+}
+.bg-dark{
+  height: 80px;
+  background-color: rgba(52, 58, 64, 0.8)!important;
+}
