@@ -4,6 +4,7 @@
     <% doctors.each do |doctor| %>
       <ul class="list-group col-md-4">
         <li class="list-group-item active"><%= doctor.name %></li>
+        <li class="list-group-item"><%= doctor.university %></li>
         <li class="list-group-item"><% doctor.specialties.each do |s| %>
           <%= s.name %>
           <br>
@@ -19,6 +20,7 @@
       </ul>
     <% end %>
   </div>
+  <br>
 <% end %>
 <br>
 

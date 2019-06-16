@@ -5,6 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-20.times do |i|
-  Specialty.create({name: "Especialidad#{i+1}"})
-end
+
+Specialty.create([
+  {name: 'Neurología'},
+  {name: 'Obstetricia'},
+  {name: 'Pediatría'},
+  {name: 'Psiquiatría'},
+  {name: 'Urología'},
+  {name: 'Ginecología'},
+  {name: 'Trastorno de la memoria'},
+  {name: 'Epilepsia'},
+  {name: 'Nutriología'},
+  {name: 'Medicina del viajero'}
+  ])
