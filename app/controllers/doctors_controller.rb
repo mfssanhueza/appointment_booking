@@ -21,7 +21,13 @@ class DoctorsController < ApplicationController
 
   # GET /doctors/1/edit
   def edit
-    @specialties = Specialty.pluck(:name, :id)
+    @specialties_selection = {}
+    @specialties = Specialty.all
+    @specialties.each do |s|
+      unless @doctor.specialties.include?(s)
+        @specialties_selection[s.name] = s.id
+      end
+    end
   end
 
   # POST /doctors
@@ -57,9 +63,11 @@ class DoctorsController < ApplicationController
   # DELETE /doctors/1
   # DELETE /doctors/1.json
   def destroy
+    @doctor.specialties.destroy_all
+    @doctor.appointments.destroy_all
     @doctor.destroy
     respond_to do |format|
-      format.html { redirect_to doctors_url, notice: 'Doctor was successfully destroyed.' }
+      format.html { redirect_to doctors_url, notice: 'Se ha eliminado al doctor y todas sus horas.' }
       format.json { head :no_content }
     end
   end
@@ -70,16 +78,8 @@ class DoctorsController < ApplicationController
       @doctor = Doctor.find(params[:id])
     end
 
-    def authenticate_admin!
-      if current_user == nil
-        redirect_to root_path, notice: 'Acceso denegado'
-      elsif current_user.admin == false
-        redirect_to root_path, notice: 'Acceso denegado'
-      end
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def doctor_params
-      params.require(:doctor).permit(:name, :specialty)
+      params.require(:doctor).permit(:name)
     end
 end

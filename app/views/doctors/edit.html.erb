@@ -1,24 +1,34 @@
-<h1>Editar datos:</h1>
+<div class="text-center bottom-margin">
+  <h1>Editar doctor:</h1>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <h3>Editar datos</h3>
+    <%= render 'form', doctor: @doctor %>
+  </div>
+  <div class="col-md-6">
+    <h3>Editar especialidades</h3>
+    <%= form_with model: [@doctor, Specialty.new], url: doctor_add_specialty_path(@doctor) do |f|  %>
+      <%= f.label 'Elegir especialidad' %>
+      <%= f.select :id, @specialties_selection, {}, {class: "form-control"} %> <br>
+      <%= f.submit 'Agregar especialidad', class: 'btn btn-info btn-lg' %>
+    <% end %>
+    <br>
 
-<%= render 'form', doctor: @doctor %>
+    <h5>Listado de especialidades del doctor <%=@doctor.name%>:</h5>
+    <% @doctor.specialties.each do |specialty| %>
+    <ul>
+      <li>
+        <%= specialty.name %> <%=link_to 'x', doctor_remove_specialty_path(@doctor, specialty), method: :delete, class:'btn btn-danger btn-sm rounded-btn'%>
+      </li>
+    </ul>
+    <% end %>
+
+  </div>
+</div>
 
 
 <br>
-<h5>Especialidades:</h5>
-<% @doctor.specialties.each do |s| %>
-<ul>
-  <li>
-    <%= s.name %>
-  </li>
-</ul>
-<% end %>
-
-<h3>Editar especialidades:</h3>
-<%= form_with model: [@doctor, Specialty.new], url: doctor_add_specialty_path(@doctor) do |f|  %>
-  <%= f.select :id, @specialties %> <br>
-
-  <%= button_to 'Agregar especialidad' %>
-<% end %>
 
 <%= link_to 'Show', @doctor %> |
 <%= link_to 'Back', doctors_path %>
