@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,11 +22,14 @@
           <li class="nav-item <%= 'active' if controller_name == 'home' %>">
             <%= link_to 'Home', root_path, class:'nav-link' %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item <%= 'active' if controller_name == 'doctors' %>">
             <%= link_to 'Doctores', doctors_path, class:'nav-link'%>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+          <li class="nav-item <%= 'active' if controller_name == 'appointments' && action_name == 'new' %>">
+            <%= link_to 'Reservar hora', new_appointment_path, class:'nav-link'%>
+          </li>
+          <li class="nav-item <%= 'active' if controller_name == 'appointments' && action_name == 'index' %>">
+            <%= link_to 'Mis horas médicas', appointments_path, class:'nav-link'%>
           </li>
         </ul>
       </div>
