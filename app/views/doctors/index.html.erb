@@ -6,7 +6,11 @@
     <% doctors.each do |doctor| %>
       <ul class="list-group col-md-4">
         <li class="list-group-item active"><%= doctor.name %></li>
-        <li class="list-group-item"><%= doctor.specialty %></li>
+        <li class="list-group-item"><% doctor.specialties.each do |s| %>
+          <%= s.name %>
+          <br>
+        <% end %>
+      </li>
         <li class="list-group-item">
           <%=link_to 'Ver', doctor, class:'btn btn-sm btn-warning' %>
           <% if current_user != nil && current_user.admin? %>

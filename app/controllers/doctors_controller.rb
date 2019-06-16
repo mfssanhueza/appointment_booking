@@ -21,6 +21,7 @@ class DoctorsController < ApplicationController
 
   # GET /doctors/1/edit
   def edit
+    @specialties = Specialty.pluck(:name, :id)
   end
 
   # POST /doctors

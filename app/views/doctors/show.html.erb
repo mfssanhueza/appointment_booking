@@ -1,12 +1,17 @@
 <p>
   <strong>Name:</strong>
-  <%= @doctor.name %>
+  <%= @doctor.id %>
 </p>
+
 
 <p>
   <strong>Specialty:</strong>
-  <%= @doctor.specialty %>
+  <% @doctor.specialties.each do |s| %>
+    <%= s.name %>
+  <% end %>
 </p>
+
+
 
 <%= link_to 'Edit', edit_doctor_path(@doctor) %> |
 <%= link_to 'Back', doctors_path %>

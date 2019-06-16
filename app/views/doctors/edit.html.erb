@@ -1,6 +1,24 @@
-<h1>Editing Doctor</h1>
+<h1>Editar datos:</h1>
 
 <%= render 'form', doctor: @doctor %>
+
+
+<br>
+<h5>Especialidades:</h5>
+<% @doctor.specialties.each do |s| %>
+<ul>
+  <li>
+    <%= s.name %>
+  </li>
+</ul>
+<% end %>
+
+<h3>Editar especialidades:</h3>
+<%= form_with model: [@doctor, Specialty.new], url: doctor_add_specialty_path(@doctor) do |f|  %>
+  <%= f.select :id, @specialties %> <br>
+
+  <%= button_to 'Agregar especialidad' %>
+<% end %>
 
 <%= link_to 'Show', @doctor %> |
 <%= link_to 'Back', doctors_path %>
