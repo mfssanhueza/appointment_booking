@@ -70,7 +70,9 @@ class DoctorsController < ApplicationController
     end
 
     def authenticate_admin!
-      unless current_user.admin?
+      if current_user == nil
+        redirect_to root_path, notice: 'Acceso denegado'
+      elsif current_user.admin?
         redirect_to root_path, notice: 'Acceso denegado'
       end
 
